@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Compiled extensions
+*.so
+*.pyd
+*.dll
+
+# Virtual environments
+venv/
+.env/
+.env.*
+.venv/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# PyInstaller
+*.spec
+*.manifest
+*.log
+dist/
+build/
+
+# Cache / temp
+*.log
+*.tmp
+*.cache
+.cache/
+tmp/
+temp/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models / AI cache (rembg)
+.u2net/
+~/.u2net/
+
+# Python test / coverage
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+
+# Runtime files
+*.sqlite
+*.db
+
+# Environment variables
+.env
+
+# Generated images / outputs
+outputs/
+exports/
+
+*.psd
