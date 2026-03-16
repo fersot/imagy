@@ -5,12 +5,13 @@ Frame del módulo Comprimir.
 import threading
 from pathlib import Path
 from tkinter import filedialog
+
 import customtkinter as ctk
 from PIL import Image
-from modules.compress import (
-    comprimir_imagen, estimar_tamano, formatear_bytes, FORMATOS_SALIDA
-)
+
+from modules.compress import comprimir_imagen, estimar_tamano, formatear_bytes
 from ui import colors, fonts
+from ui.sidebar import tintar_icono
 
 
 class CompressFrame(ctk.CTkFrame):
@@ -18,10 +19,9 @@ class CompressFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent, corner_radius=0, fg_color=colors.FRAMES_BG)
         self._imagenes: list[str] = []
-        self._formato: ctk.StringVar = ctk.StringVar(value='WEBP')
         self._calidad: ctk.IntVar = ctk.IntVar(value=85)
         self._quitar_exif: ctk.BooleanVar = ctk.BooleanVar(value=True)
-        self._preview_img: ctk.CTkImage | None = None
+        self._thumbs: list[ctk.CTkImage] = []  # evita GC
         self._build()
 
     # ─── BUILD ────────────────────────────────────────────────────────────────
@@ -29,19 +29,39 @@ class CompressFrame(ctk.CTkFrame):
     def _build(self):
         self.grid_columnconfigure(0, weight=1)
 
-        # Título
+        # Título + botón limpiar
+        fila_titulo = ctk.CTkFrame(self, fg_color='transparent')
+        fila_titulo.grid(row=0, column=0, padx=28, pady=(26, 16), sticky='ew')
+        fila_titulo.grid_columnconfigure(0, weight=1)
+
         ctk.CTkLabel(
-            self,
+            fila_titulo,
             text='Comprimir',
             font=fonts.FUENTE_TITULO,
             text_color=colors.TEXT_COLOR,
             anchor='w'
-        ).grid(row=0, column=0, padx=28, pady=(26, 16), sticky='w')
+        ).grid(row=0, column=0, sticky='w')
 
-        # Drop zone
+        self._btn_limpiar = ctk.CTkButton(
+            fila_titulo,
+            text='Limpiar',
+            width=80,
+            height=30,
+            corner_radius=8,
+            font=fonts.FUENTE_CHICA,
+            fg_color='transparent',
+            border_width=1,
+            border_color=colors.ACENTO_DIMMED,
+            text_color=colors.TEXT_GRAY,
+            hover_color=colors.PANEL_BG,
+            command=self._limpiar
+        )
+        self._btn_limpiar.grid(row=0, column=1, sticky='e')
+
+        # Drop zone — siempre igual, sin estado de preview
         self._drop_zone = ctk.CTkFrame(
             self,
-            height=120,
+            height=110,
             corner_radius=12,
             border_width=1,
             border_color=colors.ACENTO_DIMMED,
@@ -53,76 +73,36 @@ class CompressFrame(ctk.CTkFrame):
         self._drop_zone.grid_columnconfigure(0, weight=1)
         self._drop_zone.grid_rowconfigure(0, weight=1)
 
-        # Estado vacío
-        self._frame_vacio = ctk.CTkFrame(self._drop_zone, fg_color='transparent')
-        self._frame_vacio.grid(row=0, column=0)
+        frame_drop_contenido = ctk.CTkFrame(self._drop_zone, fg_color='transparent')
+        frame_drop_contenido.grid(row=0, column=0)
 
-        from ui.sidebar import tintar_icono
         icon_upload = tintar_icono('assets/icons/upload.png', colors.ACENTO_DIMMED)
         ctk.CTkLabel(
-            self._frame_vacio,
+            frame_drop_contenido,
             image=icon_upload,
             text='',
             fg_color='transparent'
         ).pack()
-
         ctk.CTkLabel(
-            self._frame_vacio,
+            frame_drop_contenido,
             text='Arrastra tus imágenes aquí \no haz click para explorar',
             font=fonts.FUENTE_BASE,
             text_color=colors.TEXT_GRAY,
             fg_color='transparent'
         ).pack(pady=(6, 0))
 
-        # Estado con imagen cargada
-        self._frame_preview = ctk.CTkFrame(self._drop_zone, fg_color='transparent')
-        self._frame_preview.grid_columnconfigure(1, weight=1)
-
-        self._canvas_preview = ctk.CTkLabel(
-            self._frame_preview, text='',
-            width=80, height=80,
-            fg_color='transparent'
-        )
-        self._canvas_preview.grid(row=0, column=0, rowspan=3, padx=(14, 12), pady=10)
-
-        ctk.CTkLabel(
-            self._frame_preview,
-            text='Imagen cargada',
-            font=fonts.FUENTE_CHICA,
-            text_color=colors.TEXT_GRAY,
-            fg_color='transparent', anchor='w'
-        ).grid(row=0, column=1, sticky='w', pady=(14, 0))
-
-        self._lbl_preview_nombre = ctk.CTkLabel(
-            self._frame_preview, text='',
-            font=fonts.FUENTE_BASE,
-            text_color=colors.TEXT_COLOR,
-            fg_color='transparent', anchor='w'
-        )
-        self._lbl_preview_nombre.grid(row=1, column=1, sticky='w')
-
-        self._lbl_preview_tam = ctk.CTkLabel(
-            self._frame_preview, text='',
-            font=fonts.FUENTE_CHICA,
-            text_color=colors.ACENTO,
-            fg_color='transparent', anchor='w'
-        )
-        self._lbl_preview_tam.grid(row=2, column=1, sticky='w', pady=(0, 14))
-
-        for w in (self._drop_zone, self._frame_vacio, self._frame_preview,
-                  self._canvas_preview, self._lbl_preview_nombre, self._lbl_preview_tam):
+        for w in (self._drop_zone, frame_drop_contenido):
             w.bind('<Button-1>', lambda _: self._explorar())
 
-        self._mostrar_vacio()
-
-        # Lista de archivos
+        # Lista de archivos con miniaturas
         self._lista_frame = ctk.CTkScrollableFrame(
             self,
             corner_radius=10,
             fg_color=colors.PANEL_BG,
+            border_width=0,
             scrollbar_button_color=colors.SIDEBAR_SEPARATOR,
             scrollbar_button_hover_color=colors.ACENTO_DIMMED,
-            height=80
+            height=175
         )
         self._lista_frame.grid(row=2, column=0, padx=28, pady=(10, 0), sticky='ew')
         self._lista_frame.grid_columnconfigure(0, weight=1)
@@ -133,7 +113,7 @@ class CompressFrame(ctk.CTkFrame):
             font=fonts.FUENTE_CHICA,
             text_color=colors.TEXT_GRAY
         )
-        self._lbl_lista_vacia.pack(pady=8)
+        self._lbl_lista_vacia.pack(pady=12)
 
         # Panel de opciones
         self._panel_opciones = ctk.CTkFrame(
@@ -147,15 +127,13 @@ class CompressFrame(ctk.CTkFrame):
         self._panel_opciones.grid_columnconfigure(1, weight=1)
         self._construir_opciones()
 
-        # Info estimado
         self._lbl_info = ctk.CTkLabel(
             self, text='',
             font=fonts.FUENTE_CHICA,
             text_color=colors.TEXT_GRAY
         )
-        self._lbl_info.grid(row=4, column=0, pady=(10, 4))
+        self._lbl_info.grid(row=4, column=0, pady=(6, 2))
 
-        # Botón
         self._btn_comprimir = ctk.CTkButton(
             self,
             text='Comprimir',
@@ -167,7 +145,7 @@ class CompressFrame(ctk.CTkFrame):
             hover_color=colors.ACENTO_HOVER,
             command=self._comprimir
         )
-        self._btn_comprimir.grid(row=5, column=0, padx=28, pady=(0, 26), sticky='ew')
+        self._btn_comprimir.grid(row=5, column=0, padx=28, pady=(4, 20), sticky='ew')
 
     def _construir_opciones(self):
         p = self._panel_opciones
@@ -204,31 +182,10 @@ class CompressFrame(ctk.CTkFrame):
         self._lbl_calidad.grid(row=0, column=1)
 
         ctk.CTkLabel(
-            p, text='Formato',
-            font=fonts.FUENTE_BASE,
-            text_color=colors.TEXT_GRAY, anchor='w'
-        ).grid(row=1, column=0, padx=(16, 12), pady=8, sticky='w')
-
-        self._seg_formato = ctk.CTkSegmentedButton(
-            p,
-            values=FORMATOS_SALIDA,
-            variable=self._formato,
-            font=fonts.FUENTE_CHICA,
-            selected_color=colors.ACENTO,
-            selected_hover_color=colors.ACENTO_HOVER,
-            unselected_color=colors.SIDEBAR_BG,
-            unselected_hover_color=colors.SIDEBAR_HOVER,
-            text_color=colors.TEXT_COLOR,
-            text_color_disabled=colors.TEXT_GRAY,
-            command=lambda _: self._actualizar_estimado(),
-        )
-        self._seg_formato.grid(row=1, column=1, padx=(0, 16), pady=8, sticky='w')
-
-        ctk.CTkLabel(
             p, text='Quitar EXIF',
             font=fonts.FUENTE_BASE,
             text_color=colors.TEXT_GRAY, anchor='w'
-        ).grid(row=2, column=0, padx=(16, 12), pady=(8, 16), sticky='w')
+        ).grid(row=1, column=0, padx=(16, 12), pady=(8, 16), sticky='w')
 
         ctk.CTkSwitch(
             p, text='',
@@ -238,69 +195,90 @@ class CompressFrame(ctk.CTkFrame):
             button_color=colors.ACENTO,
             button_hover_color=colors.ACENTO_HOVER,
             fg_color=colors.SIDEBAR_SEPARATOR,
-        ).grid(row=2, column=1, padx=(0, 16), pady=(8, 16), sticky='w')
-
-    # ─── HELPERS PREVIEW ──────────────────────────────────────────────────────
-
-    def _mostrar_vacio(self):
-        self._frame_preview.grid_remove()
-        self._frame_vacio.grid(row=0, column=0)
-        self._drop_zone.configure(border_color=colors.ACENTO_DIMMED)
-
-    def _mostrar_preview(self, ruta: str):
-        self._frame_vacio.grid_remove()
-        self._frame_preview.grid(row=0, column=0, sticky='ew')
-        self._drop_zone.configure(border_color=colors.ACENTO)
-
-        img = Image.open(ruta)
-        img.thumbnail((80, 80), Image.Resampling.LANCZOS)
-        self._preview_img = ctk.CTkImage(
-            light_image=img, dark_image=img,
-            size=(img.width, img.height)
-        )
-        self._canvas_preview.configure(image=self._preview_img)
-
-        p = Path(ruta)
-        nombre = p.name if len(p.name) <= 34 else p.name[:31] + '...'
-        self._lbl_preview_nombre.configure(text=nombre)
-        self._lbl_preview_tam.configure(text=formatear_bytes(p.stat().st_size))
+        ).grid(row=1, column=1, padx=(0, 16), pady=(8, 16), sticky='w')
 
     # ─── LÓGICA ───────────────────────────────────────────────────────────────
 
     def _explorar(self):
         archivos = filedialog.askopenfilenames(
-            title='Seleccioná imágenes',
-            filetypes=[('Imágenes', '*.jpg *.jpeg *.png *.webp *.bmp *.tiff *.avif')]
+            title='Selecciona tus imágenes',
+            filetypes=[('Imágenes', '*.jpg *.jpeg *.png *.webp *.bmp *.tiff *.avif *.ico')]
         )
         if archivos:
             self._cargar_imagenes(list(archivos))
 
     def _cargar_imagenes(self, rutas: list[str]):
         self._imagenes = rutas
-        self._mostrar_preview(rutas[0])
+        self._thumbs.clear()
 
         for w in self._lista_frame.winfo_children():
             w.destroy()
 
         for ruta in rutas:
             p = Path(ruta)
+
+            # Miniatura
+            try:
+                img = Image.open(ruta)
+                img.thumbnail((44, 44), Image.Resampling.LANCZOS)
+                thumb = ctk.CTkImage(light_image=img, dark_image=img, size=(44, 44))
+                self._thumbs.append(thumb)
+            except Exception:
+                thumb = None
+
             fila = ctk.CTkFrame(
-                self._lista_frame, fg_color=colors.SIDEBAR_BG, corner_radius=6
+                self._lista_frame,
+                fg_color=colors.SIDEBAR_BG,
+                corner_radius=8
             )
-            fila.pack(fill='x', pady=2, padx=4)
+            fila.pack(fill='x', pady=3, padx=2)
             fila.grid_columnconfigure(1, weight=1)
+
+            # Miniatura
             ctk.CTkLabel(
-                fila, text=p.name,
-                font=fonts.FUENTE_CHICA,
-                text_color=colors.TEXT_COLOR, anchor='w'
-            ).grid(row=0, column=0, padx=(10, 4), pady=6, sticky='w')
+                fila,
+                image=thumb,
+                text='',
+                width=44, height=44,
+                fg_color='transparent'
+            ).grid(row=0, column=0, padx=(8, 0), pady=6)
+
+            # Info
+            info = ctk.CTkFrame(fila, fg_color='transparent')
+            info.grid(row=0, column=1, padx=(10, 8), pady=6, sticky='w')
+
+            nombre = p.name if len(p.name) <= 32 else p.name[:29] + '...'
             ctk.CTkLabel(
-                fila, text=formatear_bytes(p.stat().st_size),
+                info,
+                text=nombre,
+                font=fonts.FUENTE_BASE,
+                text_color=colors.TEXT_COLOR,
+                anchor='w'
+            ).pack(anchor='w')
+
+            ctk.CTkLabel(
+                info,
+                text=f'{formatear_bytes(p.stat().st_size)}  ·  {p.suffix.upper().lstrip(".")}',
                 font=fonts.FUENTE_CHICA,
-                text_color=colors.TEXT_GRAY, anchor='e'
-            ).grid(row=0, column=1, padx=(4, 10), pady=6, sticky='e')
+                text_color=colors.TEXT_GRAY,
+                anchor='w'
+            ).pack(anchor='w')
 
         self._actualizar_estimado()
+
+    def _limpiar(self):
+        self._imagenes = []
+        self._thumbs.clear()
+        for w in self._lista_frame.winfo_children():
+            w.destroy()
+        self._lbl_lista_vacia = ctk.CTkLabel(
+            self._lista_frame,
+            text='Sin imágenes cargadas',
+            font=fonts.FUENTE_CHICA,
+            text_color=colors.TEXT_GRAY
+        )
+        self._lbl_lista_vacia.pack(pady=12)
+        self._lbl_info.configure(text='')
 
     def _actualizar_calidad(self, val):
         self._lbl_calidad.configure(text=str(int(val)))
@@ -311,14 +289,10 @@ class CompressFrame(ctk.CTkFrame):
             self._lbl_info.configure(text='')
             return
         try:
-            estimado = sum(
-                estimar_tamano(r, self._calidad.get(), self._formato.get())
-                for r in self._imagenes
-            )
+            estimado = sum(estimar_tamano(r, self._calidad.get()) for r in self._imagenes)
             n = len(self._imagenes)
             self._lbl_info.configure(
-                text=f'{n} imagen{"es" if n > 1 else ""} · '
-                     f'estimado {formatear_bytes(estimado)}'
+                text=f'{n} imagen{"es" if n > 1 else ""} · estimado {formatear_bytes(estimado)}'
             )
         except Exception:
             pass
@@ -337,13 +311,10 @@ class CompressFrame(ctk.CTkFrame):
         resultados = []
         for ruta in self._imagenes:
             p = Path(ruta)
-            fmt = self._formato.get()
-            ext = '.jpg' if fmt == 'JPEG' else f'.{fmt.lower()}'
-            salida = str(Path(carpeta) / (p.stem + '_comprimido' + ext))
+            salida = str(Path(carpeta) / (p.stem + '_comprimido' + p.suffix))
             res = comprimir_imagen(
                 ruta, salida,
                 calidad=self._calidad.get(),
-                formato=fmt,
                 quitar_exif=self._quitar_exif.get()
             )
             resultados.append(res)
