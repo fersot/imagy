@@ -246,7 +246,6 @@ class CompressFrame(ctk.CTkFrame):
             daemon=True
         ).start()
 
-
     def _procesar_carga(self, rutas: list[str]):
         """Corre en thread secundario — genera thumbs y estimado sin bloquear UI."""
         thumbs = []
@@ -269,7 +268,6 @@ class CompressFrame(ctk.CTkFrame):
 
         # Actualizar UI desde el hilo principal
         self.after(0, lambda: self._aplicar_carga(thumbs, estimado, len(rutas)))
-
 
     def _aplicar_carga(self, thumbs, estimado, n):
         """Actualiza la UI con los resultados del thread."""
