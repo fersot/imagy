@@ -106,9 +106,14 @@ def comprimir_imagen(
 
 
 def estimar_tamano(ruta_entrada: str, calidad: int) -> int:
-    """Estima el tamaño comprimido sin guardar en disco."""
     fmt = _formato_desde_ruta(ruta_entrada)
     img = Image.open(ruta_entrada)
+
+    if fmt == 'JPEG':
+        img.draft('RGB', (200, 200))
+
+    img.load()  # fuerza lectura del draft — sin reasignar
+
     img = _preparar_imagen(img, fmt)
     buf = io.BytesIO()
     kwargs = _kwargs_guardado(img, fmt, calidad, quitar_exif=True)

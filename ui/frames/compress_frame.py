@@ -5,33 +5,30 @@ Frame del módulo Comprimir.
 import threading
 from pathlib import Path
 from tkinter import filedialog
-
+import tkinter as tk
 import customtkinter as ctk
 from PIL import Image
-
 from modules.compress import comprimir_imagen, estimar_tamano, formatear_bytes
 from ui import colors, fonts
 from ui.sidebar import tintar_icono
 
-
+# ────────── FRAME DE COMPRESION ──────────
 class CompressFrame(ctk.CTkFrame):
-
     def __init__(self, parent):
         super().__init__(parent, corner_radius=0, fg_color=colors.FRAMES_BG)
         self._imagenes: list[str] = []
-        self._calidad: ctk.IntVar = ctk.IntVar(value=85)
+        self._calidad: ctk.IntVar = ctk.IntVar(value=60)
         self._quitar_exif: ctk.BooleanVar = ctk.BooleanVar(value=True)
-        self._thumbs: list[ctk.CTkImage] = []  # evita GC
+        self._thumbs: list[ctk.CTkImage] = []
         self._build()
 
-    # ─── BUILD ────────────────────────────────────────────────────────────────
-
+    # ───────────────────────── BUILD ─────────────────────────
     def _build(self):
         self.grid_columnconfigure(0, weight=1)
 
         # Título + botón limpiar
         fila_titulo = ctk.CTkFrame(self, fg_color='transparent')
-        fila_titulo.grid(row=0, column=0, padx=28, pady=(26, 16), sticky='ew')
+        fila_titulo.grid(row=0, column=0, padx=28, pady=(26, 8), sticky='ew')
         fila_titulo.grid_columnconfigure(0, weight=1)
 
         ctk.CTkLabel(
@@ -42,6 +39,7 @@ class CompressFrame(ctk.CTkFrame):
             anchor='w'
         ).grid(row=0, column=0, sticky='w')
 
+        # Botón Limpiar: Ahora con fondo blanco y texto oscuro
         self._btn_limpiar = ctk.CTkButton(
             fila_titulo,
             text='Limpiar',
@@ -49,16 +47,15 @@ class CompressFrame(ctk.CTkFrame):
             height=30,
             corner_radius=8,
             font=fonts.FUENTE_CHICA,
-            fg_color='transparent',
-            border_width=1,
-            border_color=colors.ACENTO_DIMMED,
-            text_color=colors.TEXT_GRAY,
-            hover_color=colors.PANEL_BG,
+            fg_color='#FFFFFF',
+            text_color='#1A1A1A', 
+            hover_color='#EEEEEE',
+            border_width=0,
             command=self._limpiar
         )
         self._btn_limpiar.grid(row=0, column=1, sticky='e')
 
-        # Drop zone — siempre igual, sin estado de preview
+        # Drop zone
         self._drop_zone = ctk.CTkFrame(
             self,
             height=110,
@@ -68,7 +65,7 @@ class CompressFrame(ctk.CTkFrame):
             fg_color=colors.PANEL_BG,
             cursor='hand2'
         )
-        self._drop_zone.grid(row=1, column=0, padx=28, sticky='ew')
+        self._drop_zone.grid(row=1, column=0, padx=28, pady=8, sticky='ew')
         self._drop_zone.grid_propagate(False)
         self._drop_zone.grid_columnconfigure(0, weight=1)
         self._drop_zone.grid_rowconfigure(0, weight=1)
@@ -77,34 +74,25 @@ class CompressFrame(ctk.CTkFrame):
         frame_drop_contenido.grid(row=0, column=0)
 
         icon_upload = tintar_icono('assets/icons/upload.png', colors.ACENTO_DIMMED)
+        ctk.CTkLabel(frame_drop_contenido, image=icon_upload, text='').pack()
         ctk.CTkLabel(
             frame_drop_contenido,
-            image=icon_upload,
-            text='',
-            fg_color='transparent'
-        ).pack()
-        ctk.CTkLabel(
-            frame_drop_contenido,
-            text='Arrastra tus imágenes aquí \no haz click para explorar',
+            text='Click aquí para explorar',
             font=fonts.FUENTE_BASE,
-            text_color=colors.TEXT_GRAY,
-            fg_color='transparent'
+            text_color=colors.TEXT_GRAY
         ).pack(pady=(6, 0))
 
         for w in (self._drop_zone, frame_drop_contenido):
             w.bind('<Button-1>', lambda _: self._explorar())
 
-        # Lista de archivos con miniaturas
+        # Lista de archivos cargados
         self._lista_frame = ctk.CTkScrollableFrame(
             self,
             corner_radius=10,
             fg_color=colors.PANEL_BG,
-            border_width=0,
-            scrollbar_button_color=colors.SIDEBAR_SEPARATOR,
-            scrollbar_button_hover_color=colors.ACENTO_DIMMED,
-            height=175
+            height=200
         )
-        self._lista_frame.grid(row=2, column=0, padx=28, pady=(10, 0), sticky='ew')
+        self._lista_frame.grid(row=2, column=0, padx=28, pady=8, sticky='ew') # Espaciado uniforme
         self._lista_frame.grid_columnconfigure(0, weight=1)
 
         self._lbl_lista_vacia = ctk.CTkLabel(
@@ -123,29 +111,17 @@ class CompressFrame(ctk.CTkFrame):
             border_width=1,
             border_color=colors.SIDEBAR_SEPARATOR
         )
-        self._panel_opciones.grid(row=3, column=0, padx=28, pady=(10, 0), sticky='ew')
+        self._panel_opciones.grid(row=3, column=0, padx=28, pady=8, sticky='ew')
         self._panel_opciones.grid_columnconfigure(1, weight=1)
         self._construir_opciones()
 
+        # Etiqueta de información (encima del botón comprimir)
         self._lbl_info = ctk.CTkLabel(
             self, text='',
             font=fonts.FUENTE_CHICA,
             text_color=colors.TEXT_GRAY
         )
-        self._lbl_info.grid(row=4, column=0, pady=(6, 2))
-
-        self._btn_comprimir = ctk.CTkButton(
-            self,
-            text='Comprimir',
-            height=44,
-            corner_radius=10,
-            font=fonts.FUENTE_BASE,
-            fg_color=colors.ACENTO,
-            text_color=colors.TEXT_ACTIVE,
-            hover_color=colors.ACENTO_HOVER,
-            command=self._comprimir
-        )
-        self._btn_comprimir.grid(row=5, column=0, padx=28, pady=(4, 20), sticky='ew')
+        self._lbl_info.grid(row=4, column=0, pady=(0, 4))
 
     def _construir_opciones(self):
         p = self._panel_opciones
@@ -163,6 +139,7 @@ class CompressFrame(ctk.CTkFrame):
         self._slider = ctk.CTkSlider(
             fila_cal,
             from_=10, to=100,
+            number_of_steps=9,
             variable=self._calidad,
             command=self._actualizar_calidad,
             button_color=colors.ACENTO,
@@ -173,7 +150,7 @@ class CompressFrame(ctk.CTkFrame):
         self._slider.grid(row=0, column=0, sticky='ew', padx=(0, 10))
 
         self._lbl_calidad = ctk.CTkLabel(
-            fila_cal, text='85',
+            fila_cal, text='60',
             font=fonts.FUENTE_BASE,
             text_color=colors.ACENTO,
             fg_color='transparent',
@@ -197,8 +174,22 @@ class CompressFrame(ctk.CTkFrame):
             fg_color=colors.SIDEBAR_SEPARATOR,
         ).grid(row=1, column=1, padx=(0, 16), pady=(8, 16), sticky='w')
 
-    # ─── LÓGICA ───────────────────────────────────────────────────────────────
+        # --- BOTÓN COMPRIMIR (Dentro del contenedor de opciones) ---
+        self._btn_comprimir = ctk.CTkButton(
+            p,
+            text='Comprimir',
+            height=40,
+            corner_radius=8,
+            font=fonts.FUENTE_BASE,
+            fg_color=colors.ACENTO,
+            text_color=colors.TEXT_ACTIVE,
+            hover_color=colors.ACENTO_HOVER,
+            command=self._comprimir
+        )
+        # Se posiciona en la fila 2, ocupando ambas columnas (columnspan=2)
+        self._btn_comprimir.grid(row=2, column=0, columnspan=2, padx=16, pady=(0, 16), sticky='ew')
 
+    # ─── LÓGICA ───────────────────────────────────────────────────────────────
     def _explorar(self):
         archivos = filedialog.askopenfilenames(
             title='Selecciona tus imágenes',
@@ -214,57 +205,85 @@ class CompressFrame(ctk.CTkFrame):
         for w in self._lista_frame.winfo_children():
             w.destroy()
 
+        # Mostrar filas vacías inmediatamente — sin bloquear
+        self._filas_lista = []
         for ruta in rutas:
             p = Path(ruta)
-
-            # Miniatura
-            try:
-                img = Image.open(ruta)
-                img.thumbnail((44, 44), Image.Resampling.LANCZOS)
-                thumb = ctk.CTkImage(light_image=img, dark_image=img, size=(44, 44))
-                self._thumbs.append(thumb)
-            except Exception:
-                thumb = None
-
             fila = ctk.CTkFrame(
-                self._lista_frame,
-                fg_color=colors.SIDEBAR_BG,
-                corner_radius=8
+                self._lista_frame, fg_color=colors.SIDEBAR_BG, corner_radius=8
             )
             fila.pack(fill='x', pady=3, padx=2)
             fila.grid_columnconfigure(1, weight=1)
 
-            # Miniatura
-            ctk.CTkLabel(
-                fila,
-                image=thumb,
-                text='',
-                width=44, height=44,
-                fg_color='transparent'
-            ).grid(row=0, column=0, padx=(8, 0), pady=6)
+            # Placeholder mientras carga la thumb
+            lbl_thumb = ctk.CTkLabel(
+                fila, text='', width=44, height=44, fg_color='transparent'
+            )
+            lbl_thumb.grid(row=0, column=0, padx=(8, 0), pady=6)
 
-            # Info
             info = ctk.CTkFrame(fila, fg_color='transparent')
             info.grid(row=0, column=1, padx=(10, 8), pady=6, sticky='w')
 
             nombre = p.name if len(p.name) <= 32 else p.name[:29] + '...'
             ctk.CTkLabel(
-                info,
-                text=nombre,
+                info, text=nombre,
                 font=fonts.FUENTE_BASE,
-                text_color=colors.TEXT_COLOR,
-                anchor='w'
+                text_color=colors.TEXT_COLOR, anchor='w'
             ).pack(anchor='w')
-
             ctk.CTkLabel(
                 info,
                 text=f'{formatear_bytes(p.stat().st_size)}  ·  {p.suffix.upper().lstrip(".")}',
                 font=fonts.FUENTE_CHICA,
-                text_color=colors.TEXT_GRAY,
-                anchor='w'
+                text_color=colors.TEXT_GRAY, anchor='w'
             ).pack(anchor='w')
 
-        self._actualizar_estimado()
+            self._filas_lista.append(lbl_thumb)
+
+        # Generar thumbs y estimado en background
+        threading.Thread(
+            target=self._procesar_carga,
+            args=(rutas,),
+            daemon=True
+        ).start()
+
+
+    def _procesar_carga(self, rutas: list[str]):
+        """Corre en thread secundario — genera thumbs y estimado sin bloquear UI."""
+        thumbs = []
+        for ruta in rutas:
+            try:
+                img = Image.open(ruta)
+                img.thumbnail((44, 44), Image.Resampling.LANCZOS)
+                thumb = ctk.CTkImage(light_image=img, dark_image=img, size=(44, 44))
+            except Exception:
+                thumb = None
+            thumbs.append(thumb)
+
+        # Estimado — usa draft mode para imágenes grandes (mucho más rápido)
+        estimado = 0
+        for ruta in rutas:
+            try:
+                estimado += estimar_tamano(ruta, self._calidad.get())
+            except Exception:
+                pass
+
+        # Actualizar UI desde el hilo principal
+        self.after(0, lambda: self._aplicar_carga(thumbs, estimado, len(rutas)))
+
+
+    def _aplicar_carga(self, thumbs, estimado, n):
+        """Actualiza la UI con los resultados del thread."""
+        self._thumbs = [t for t in thumbs if t]
+
+        for i, thumb in enumerate(thumbs):
+            if thumb and i < len(self._filas_lista):
+                self._filas_lista[i].configure(image=thumb)
+
+        if estimado > 0:
+            self._lbl_info.configure(
+                text=f'{n} imagen{"es" if n > 1 else ""} · '
+                    f'estimado {formatear_bytes(estimado)}'
+            )
 
     def _limpiar(self):
         self._imagenes = []
