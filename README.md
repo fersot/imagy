@@ -1,3 +1,5 @@
+<img width="1761" height="497" alt="banner" src="https://github.com/user-attachments/assets/0503ce8a-794b-42fc-bec9-6de98962590d" />
+
 # Yagua - Editor de Imágenes
 
 Aplicación de escritorio para edición y procesamiento de imágenes por lotes.
