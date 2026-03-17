@@ -1,4 +1,4 @@
-﻿# Yagua - Editor de ImÃ¡genes
+# Yagua - Editor de Imágenes
 
 AplicaciÃ³n de escritorio para ediciÃ³n y procesamiento de imÃ¡genes por lotes.
 
@@ -38,15 +38,15 @@ AplicaciÃ³n de escritorio para ediciÃ³n y procesamiento de imÃ¡genes por l
 
 ## Tech Stack
 
-| TecnologÃ­a        | VersiÃ³n | PropÃ³sito                            |
-| ----------------- | ------- | ------------------------------------ |
-| **Python**        | 3.13+   | Lenguaje principal                   |
-| **CustomTkinter** | 5.2.2   | Framework de UI moderno              |
-| **Pillow**        | 12.1.1  | Procesamiento de imÃ¡genes            |
-| **piexif**       | 1.1.3   | ManipulaciÃ³n de metadatos EXIF       |
-| **tkinterdnd2**   | 0.4.3   | Drag & Drop                          |
-| **darkdetect**    | 0.8.0   | DetecciÃ³n de tema oscuro del sistema |
-| **rembg**         | 2.0.57  | RemociÃ³n de fondo con IA            |
+| TecnologÃ­a       | VersiÃ³n | PropÃ³sito                            |
+| ----------------- | -------- | ------------------------------------- |
+| **Python**        | 3.13+    | Lenguaje principal                    |
+| **CustomTkinter** | 5.2.2    | Framework de UI moderno               |
+| **Pillow**        | 12.1.1   | Procesamiento de imÃ¡genes            |
+| **piexif**        | 1.1.3    | ManipulaciÃ³n de metadatos EXIF       |
+| **tkinterdnd2**   | 0.4.3    | Drag & Drop                           |
+| **darkdetect**    | 0.8.0    | DetecciÃ³n de tema oscuro del sistema |
+| **rembg**         | 2.0.57   | RemociÃ³n de fondo con IA             |
 
 ### Requisitos del Sistema
 
@@ -150,13 +150,13 @@ El proyecto sigue una arquitectura **MVC simplificada** con separaciÃ³n clara 
 
 ### Clases Principales
 
-| Clase           | UbicaciÃ³n                     | Responsabilidad                   |
-| --------------- | ----------------------------- | --------------------------------- |
+| Clase           | UbicaciÃ³n                    | Responsabilidad                    |
+| --------------- | ----------------------------- | ---------------------------------- |
 | `YaguaApp`      | `app.py`                      | Ventana principal, inicializaciÃ³n |
-| `MainWindow`    | `ui/main_window.py`           | Contenedor con sidebar y frames   |
-| `Sidebar`       | `ui/sidebar.py`               | NavegaciÃ³n entre mÃ³dulos          |
+| `MainWindow`    | `ui/main_window.py`           | Contenedor con sidebar y frames    |
+| `Sidebar`       | `ui/sidebar.py`               | NavegaciÃ³n entre mÃ³dulos         |
 | `BaseFrame`     | `ui/frames/base.py`           | Clase base con mÃ©todos comunes    |
-| `SettingsFrame` | `ui/frames/settings/frame.py`| ConfiguraciÃ³n (idioma, tema)      |
+| `SettingsFrame` | `ui/frames/settings/frame.py` | ConfiguraciÃ³n (idioma, tema)      |
 
 ---
 
@@ -323,7 +323,7 @@ La aplicaciÃ³n cuenta con un sistema completo de traducciones multiidioma.
 ### Idiomas disponibles
 
 - **EspaÃ±ol** (`es.py`)
-- **English** (`en.py`)  
+- **English** (`en.py`)
 - **PortuguÃªs** (`pt.py`)
 
 ### Uso
@@ -351,6 +351,7 @@ El sistema usa un archivo JSON para guardar la configuraciÃ³n del usuario (`us
 ### Ventana tÃ­tulo
 
 El tÃ­tulo de la ventana tambiÃ©n es traducible (`app_title`):
+
 - EspaÃ±ol: "Yagua - Editor de ImÃ¡genes"
 - English: "Yagua - Image Editor"
 - PortuguÃªs: "Yagua - Editor de Imagens"
