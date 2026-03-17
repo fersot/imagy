@@ -1,4 +1,4 @@
-<img width="1761" height="497" alt="banner" src="https://github.com/user-attachments/assets/0503ce8a-794b-42fc-bec9-6de98962590d" />
+<img width="1761" height="497" alt="banner" src="https://github.com/user-attachments/assets/74ad2495-3642-4dc8-b010-07d0245fcb18" />
 
 # Yagua - Editor de Imágenes
 
