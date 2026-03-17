@@ -15,18 +15,21 @@ from ui.frames.watermark_frame import WatermarkFrame
 from ui.frames.metadata_frame import MetadataFrame
 from ui.frames.lqip_frame import LQIPFrame
 from ui.frames.optimizer_frame import OptimizerFrame
+from ui.frames.settings_frame import SettingsFrame
+from translations import t
 
 MODULOS = {
-    'compress': ('Comprimir', CompressFrame),
-    'convert': ('Convertir', ConvertFrame),
-    'remove_bg': ('Quitar fondo', RemoveBgFrame),
-    'resize': ('Redimensionar', ResizeFrame),
-    'rename': ('Renombrar lote', RenameFrame),
-    'palette': ('Paleta colores', PaletteFrame),
-    'watermark': ('Watermark', WatermarkFrame),
-    'metadata': ('Metadatos EXIF', MetadataFrame),
-    'lqip': ('LQIP / Base64', LQIPFrame),
-    'optimizer': ('Smart Optimizer', OptimizerFrame),
+    'compress': ('compress', CompressFrame),
+    'convert': ('convert', ConvertFrame),
+    'remove_bg': ('remove_bg', RemoveBgFrame),
+    'resize': ('resize', ResizeFrame),
+    'rename': ('rename', RenameFrame),
+    'palette': ('palette', PaletteFrame),
+    'watermark': ('watermark', WatermarkFrame),
+    'metadata': ('metadata', MetadataFrame),
+    'lqip': ('lqip', LQIPFrame),
+    'optimizer': ('optimizer', OptimizerFrame),
+    'settings': ('settings', SettingsFrame),
 }
 
 class MainWindow(ctk.CTkFrame):

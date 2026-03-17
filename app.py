@@ -13,6 +13,7 @@ from PIL import Image, ImageTk
 
 from ui import fonts
 from ui.main_window import MainWindow
+from translations import t
 
 logger = logging.getLogger(__name__)
 
@@ -23,8 +24,10 @@ class YaguaApp(ctk.CTk):
     def __init__(self):
         super().__init__()
         fonts.inicializar_fuentes()
-        self.title('Yagua - Image Editor')
+        self.title(t('app_title'))
         self.geometry('1000x500')
+        self.update()
+        self.state('zoomed')
         self.minsize(900, 600)
         self._setup_icon()
         self.main_window = MainWindow(self)
@@ -53,7 +56,8 @@ class YaguaApp(ctk.CTk):
     def _setup_icon_png(self, icon_path: Path):
         """Configura el icono desde archivo PNG."""
         try:
-            img = Image.open(icon_path)
-            self.iconphoto(True, ImageTk.PhotoImage(img))
+            img = Image.open(icon_path).convert('RGBA')
+            img_tk = ImageTk.PhotoImage(img)
+            self.iconphoto(True, img_tk)  # type: ignore[arg-type]
         except Exception as e:
             logger.warning(f"Error al cargar icono: {e}")

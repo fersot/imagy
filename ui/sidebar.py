@@ -3,29 +3,34 @@ Barra lateral de navegación de la aplicación.
 Contiene el menú de módulos disponibles.
 """
 
+import webbrowser
 from pathlib import Path
 from PIL import Image
 import customtkinter as ctk
 from ui import colors, fonts
 from utils import tintar_icono
+from translations import t
+
+GITHUB_URL = 'https://github.com/GuilleBouix'
 
 MENU_ITEMS = [
-    ('compress', 'Comprimir', 'assets/icons/compress.png'),
-    ('convert', 'Convertir', 'assets/icons/convert.png'),
-    ('remove_bg', 'Quitar Fondo', 'assets/icons/remove_background.png'),
-    ('resize', 'Redimensionar', 'assets/icons/resize.png'),
-    ('rename', 'Renombrar Lote', 'assets/icons/rename.png'),
-    ('palette', 'Extraer Paleta', 'assets/icons/palette.png'),
-    ('watermark', 'Marca de Agua', 'assets/icons/watermark.png'),
-    ('metadata', 'Metadatos EXIF', 'assets/icons/metadata.png'),
-    ('lqip', 'LQIP / Base64', 'assets/icons/lqip.png'),
-    ('optimizer', 'Optimizador', 'assets/icons/optimizer.png'),
+    ('compress', 'compress', 'assets/icons/compress.png'),
+    ('convert', 'convert', 'assets/icons/convert.png'),
+    ('remove_bg', 'remove_bg', 'assets/icons/remove_background.png'),
+    ('resize', 'resize', 'assets/icons/resize.png'),
+    ('rename', 'rename', 'assets/icons/rename.png'),
+    ('palette', 'palette', 'assets/icons/palette.png'),
+    ('watermark', 'watermark', 'assets/icons/watermark.png'),
+    ('metadata', 'metadata', 'assets/icons/metadata.png'),
+    ('lqip', 'lqip', 'assets/icons/lqip.png'),
+    ('optimizer', 'optimizer', 'assets/icons/optimizer.png'),
+    ('settings', 'settings', 'assets/icons/settings.png'),
 ]
 
+LOGO_SIZE = 135
 
 class Sidebar(ctk.CTkFrame):
-    """Barra lateral con botones de navegación."""
-    
+    """Barra lateral con botones de navegación."""  
     def __init__(self, parent, on_select):
         super().__init__(
             parent,
@@ -44,10 +49,16 @@ class Sidebar(ctk.CTkFrame):
         ruta_icono = Path('assets/icon.png')
         imagen = Image.open(ruta_icono).convert('RGBA')
         
+        w, h = imagen.size
+        if w > h:
+            new_size = (LOGO_SIZE, int(h * LOGO_SIZE / w))
+        else:
+            new_size = (int(w * LOGO_SIZE / h), LOGO_SIZE)
+        
         imagen_ctk = ctk.CTkImage(
             light_image=imagen,
             dark_image=imagen,
-            size=(60, 60)
+            size=new_size
         )
         
         logo = ctk.CTkLabel(self, image=imagen_ctk, text='')
@@ -60,8 +71,9 @@ class Sidebar(ctk.CTkFrame):
         )
         separador.pack(fill='x', padx=20, pady=(10, 20))
 
-        for key, label, icon_path in MENU_ITEMS:
+        for key, translate_key, icon_path in MENU_ITEMS:
             icon_ctk = tintar_icono(icon_path, colors.ICON_COLOR)
+            label = t(translate_key)
             
             btn = ctk.CTkButton(
                 self,
@@ -79,6 +91,30 @@ class Sidebar(ctk.CTkFrame):
             btn.pack(pady=3, padx=10, fill='x')
             
             self.buttons[key] = {'btn': btn, 'icon_path': icon_path}
+
+        # Developed by - enlace al final
+        self._frame_footer = ctk.CTkFrame(self, fg_color='transparent')
+        self._frame_footer.pack(side='bottom', pady=(0, 10), fill='x', padx=10)
+        self._frame_footer.grid_columnconfigure((0, 1), weight=1)
+
+        ctk.CTkLabel(
+            self._frame_footer,
+            text=t('developed_by'),
+            font=fonts.FUENTE_CHICA,
+            text_color=colors.TEXT_GRAY,
+            anchor='e'
+        ).grid(row=0, column=0, sticky='e')
+
+        lbl_link = ctk.CTkLabel(
+            self._frame_footer,
+            text=t('github'),
+            font=fonts.FUENTE_CHICA,
+            text_color=colors.ACENTO,
+            cursor='hand2',
+            anchor='w'
+        )
+        lbl_link.grid(row=0, column=1, sticky='w')
+        lbl_link.bind('<Button-1>', lambda _: webbrowser.open(GITHUB_URL))
 
     def set_active(self, key):
         """Marca el botón activo según el módulo seleccionado."""

@@ -10,6 +10,7 @@ from PIL import Image
 from modules.compress import comprimir_imagen, estimar_tamano, formatear_bytes
 from ui import colors, fonts
 from utils import tintar_icono
+from translations import t
 
 
 class CompressFrame(ctk.CTkFrame):
@@ -31,7 +32,7 @@ class CompressFrame(ctk.CTkFrame):
 
         ctk.CTkLabel(
             fila_titulo,
-            text='Comprimir',
+            text=t('compress_title'),
             font=fonts.FUENTE_TITULO,
             text_color=colors.TEXT_COLOR,
             anchor='w'
@@ -39,7 +40,7 @@ class CompressFrame(ctk.CTkFrame):
 
         self._btn_limpiar = ctk.CTkButton(
             fila_titulo,
-            text='Limpiar',
+            text=t('clean'),
             width=80,
             height=30,
             corner_radius=8,
@@ -54,7 +55,7 @@ class CompressFrame(ctk.CTkFrame):
 
         self._btn_seleccionar = ctk.CTkButton(
             self,
-            text='Seleccionar imágenes',
+            text=t('select_images'),
             height=40,
             corner_radius=8,
             font=fonts.FUENTE_BASE,
@@ -80,7 +81,7 @@ class CompressFrame(ctk.CTkFrame):
 
         self._lbl_lista_vacia = ctk.CTkLabel(
             self._lista_frame,
-            text='Sin imágenes cargadas',
+            text=t('no_images'),
             font=fonts.FUENTE_CHICA,
             text_color=colors.TEXT_GRAY
         )
@@ -108,7 +109,7 @@ class CompressFrame(ctk.CTkFrame):
         p = self._panel_opciones
 
         ctk.CTkLabel(
-            p, text='Calidad',
+            p, text=t('quality'),
             font=fonts.FUENTE_BASE,
             text_color=colors.TEXT_GRAY, anchor='w'
         ).grid(row=0, column=0, padx=(16, 12), pady=(16, 8), sticky='w')
@@ -140,7 +141,7 @@ class CompressFrame(ctk.CTkFrame):
         self._lbl_calidad.grid(row=0, column=1)
 
         ctk.CTkLabel(
-            p, text='Quitar EXIF',
+            p, text=t('remove_exif'),
             font=fonts.FUENTE_BASE,
             text_color=colors.TEXT_GRAY, anchor='w'
         ).grid(row=1, column=0, padx=(16, 12), pady=(8, 16), sticky='w')
@@ -157,7 +158,7 @@ class CompressFrame(ctk.CTkFrame):
 
         self._btn_comprimir = ctk.CTkButton(
             p,
-            text='Comprimir',
+            text=t('compress_btn'),
             height=40,
             corner_radius=8,
             font=fonts.FUENTE_BASE,
@@ -170,7 +171,7 @@ class CompressFrame(ctk.CTkFrame):
 
     def _explorar(self):
         archivos = filedialog.askopenfilenames(
-            title='Selecciona tus imágenes',
+            title=t('select_images'),
             filetypes=[('Imágenes', '*.jpg *.jpeg *.png *.webp *.bmp *.tiff *.avif *.ico')]
         )
         if archivos:
@@ -249,9 +250,9 @@ class CompressFrame(ctk.CTkFrame):
                 self._filas_lista[i].configure(image=thumb)
 
         if estimado > 0:
+            suffix = t('images_loaded') if n > 1 else t('image_loaded')
             self._lbl_info.configure(
-                text=f'{n} imagen{"es" if n > 1 else ""} · '
-                    f'estimado {formatear_bytes(estimado)}'
+                text=f'{n} {suffix} · {t("estimated")} {formatear_bytes(estimado)}'
             )
 
     def _limpiar(self):
@@ -274,20 +275,21 @@ class CompressFrame(ctk.CTkFrame):
         try:
             estimado = sum(estimar_tamano(r, self._calidad.get()) for r in self._imagenes)
             n = len(self._imagenes)
+            suffix = t('images_loaded') if n > 1 else t('image_loaded')
             self._lbl_info.configure(
-                text=f'{n} imagen{"es" if n > 1 else ""} · estimado {formatear_bytes(estimado)}'
+                text=f'{n} {suffix} · {t("estimated")} {formatear_bytes(estimado)}'
             )
         except Exception:
             pass
 
     def _comprimir(self):
         if not self._imagenes:
-            self._lbl_info.configure(text='Primero cargá al menos una imagen.')
+            self._lbl_info.configure(text=t('load_images_first'))
             return
-        carpeta = filedialog.askdirectory(title='Elegí carpeta de salida')
+        carpeta = filedialog.askdirectory(title=t('select_output_folder'))
         if not carpeta:
             return
-        self._btn_comprimir.configure(state='disabled', text='Comprimiendo...')
+        self._btn_comprimir.configure(state='disabled', text=t('compressing'))
         threading.Thread(target=self._proceso, args=(carpeta,), daemon=True).start()
 
     def _proceso(self, carpeta: str):
@@ -309,9 +311,10 @@ class CompressFrame(ctk.CTkFrame):
         self.after(0, lambda: self._finalizar(n, total_orig, total_comp, reduccion))
 
     def _finalizar(self, n, orig, comp, reduccion):
-        self._btn_comprimir.configure(state='normal', text='Comprimir')
+        self._btn_comprimir.configure(state='normal', text=t('compress_btn'))
+        suffix = t('images_loaded') if n > 1 else t('image_loaded')
         self._lbl_info.configure(
-            text=f'{n} imagen{"es" if n > 1 else ""} · '
+            text=f'{n} {suffix} · '
                  f'{formatear_bytes(orig)} → {formatear_bytes(comp)} · '
-                 f'{reduccion}% más chico'
+                 f'{reduccion}% {t("compressed")}'
         )

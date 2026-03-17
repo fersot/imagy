@@ -151,12 +151,12 @@ class PaletteFrame(ctk.CTkFrame):
             fila_top,
             values=['4', '6', '8', '10', '12'],
             font=fonts.FUENTE_CHICA,
-            selected_color=colors.ACENTO,
-            selected_hover_color=colors.ACENTO_HOVER,
+            selected_color="#949494",
+            selected_hover_color='#949494',
             unselected_color=colors.SIDEBAR_BG,
             unselected_hover_color=colors.SIDEBAR_HOVER,
             text_color=colors.TEXT_COLOR,
-            command=self._auto_extraer  # cambia N → re-extrae automáticamente
+            command=self._auto_extraer
         )
         self._seg_n.set('6')
         self._seg_n.grid(row=0, column=1, sticky='e')
@@ -190,7 +190,7 @@ class PaletteFrame(ctk.CTkFrame):
 
     def _mostrar_vacio(self):
         self._frame_preview.configure(border_color=colors.ACENTO_DIMMED)
-        self._lbl_preview.configure(image='')
+        self._lbl_preview.configure(image=None)
         self._lbl_nombre.configure(text='Sin imagen seleccionada')
         self._lbl_meta.configure(text='Seleccioná una imagen para ver la paleta')
 
