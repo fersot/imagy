@@ -1,4 +1,4 @@
-<img width="1761" height="497" alt="banner" src="https://github.com/user-attachments/assets/03e76c72-7913-4807-8ec8-c2cb7869d2c7" />
+<img width="1761" height="497" alt="banner" src="https://github.com/user-attachments/assets/fc1dacf8-5249-43da-a294-4b20dc423304" />
 
 # Yagua - Procesador de Imágenes
 
