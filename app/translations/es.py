@@ -65,6 +65,19 @@ TRANSLATIONS = {
     'converted_to_plural': 'convertidas a',
     'load_images_first_convert': 'Carga al menos una imagen.',
     
+    # Quitar Fondo
+    'remove_bg_title':        'Quitar Fondo',
+    'background_type':        'Fondo resultante',
+    'bg_transparent':         'Transparente',
+    'bg_white':               'Blanco',
+    'bg_black':               'Negro',
+    'transparency_png_only':  'Transparente exporta como PNG.',
+    'remove_bg_btn':          'Quitar fondo',
+    'processing':             'Procesando...',
+    'processed':              'procesadas',
+    'rembg_not_installed':    'rembg no está instalado.\nEjecutá este comando en tu terminal:',
+    'model_first_download':   'Primera vez: el modelo U2Net (~170MB) se descargará automáticamente. Luego funciona sin internet.',
+
     # Palette
     'palette_title': 'Paleta de colores',
     'colors_to_extract': 'Colores a extraer',

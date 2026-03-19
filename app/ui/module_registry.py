@@ -42,7 +42,7 @@ class ModuleSpec:
 _MODULE_SPECS = [
     ModuleSpec('compress', 'compress', 'assets/icons/compress.png', 'app.ui.frames.compress.frame:CompressFrame'),
     ModuleSpec('convert', 'convert', 'assets/icons/convert.png', 'app.ui.frames.convert.frame:ConvertFrame'),
-    ModuleSpec('remove_bg', 'remove_bg', 'assets/icons/remove_background.png', 'app.ui.frames.remove_bg_frame:RemoveBgFrame'),
+    ModuleSpec('remove_bg', 'remove_bg', 'assets/icons/remove_background.png', 'app.ui.frames.remove_bg.frame:RemoveBgFrame'),
     ModuleSpec('resize', 'resize', 'assets/icons/resize.png', 'app.ui.frames.resize.frame:ResizeFrame'),
     ModuleSpec('rename', 'rename', 'assets/icons/rename.png', 'app.ui.frames.rename_frame:RenameFrame'),
     ModuleSpec('palette', 'palette', 'assets/icons/palette.png', 'app.ui.frames.palette.frame:PaletteFrame'),
