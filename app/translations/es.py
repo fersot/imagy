@@ -101,7 +101,7 @@ TRANSLATIONS = {
     
     # Renombrar
     'rename_title':        'Renombrar Lote',
-    'rename_numbering':    'Prefijo + numeración  (foto_001, foto_002...)',
+    'rename_numbering':    'Prefijo + Numeración',
     'rename_prefix':       'Prefijo',
     'rename_start':        'Inicio',
     'rename_replace':      'Reemplazar texto',
@@ -200,6 +200,26 @@ TRANSLATIONS = {
     'redim': 'redim',
     'crop': 'crop',
     'canvas': 'canvas',
+
+    # LQIP
+    'lqip_title':             'Low Quality Image Placeholders / Base64',
+    'lqip_mode':              'Modo',
+    'lqip_mode_lqip_desc':    'Genera una versión tiny y borrosa de la imagen.',
+    'lqip_mode_b64_desc':     'Convierte la imagen completa a base64.',
+    'lqip_width':             'Ancho (px)',
+    'lqip_blur':              'Desenfoque',
+    'lqip_quality':           'Calidad',
+    'lqip_export':            'Exportar resultado',
+    'lqip_export_field':      'Campo a exportar',
+    'lqip_actions':           'Acciones',
+    'lqip_btn_process':       'Generar',
+    'lqip_btn_copy':          'Copiar',
+    'lqip_btn_save':          'Guardar',
+    'lqip_ready_to_export':   'listo para exportar',
+    'lqip_process_first':     'Primero generá el resultado.',
+    'lqip_copied':            'Copiado al portapapeles.',
+    'lqip_save_title':        'Guardar resultado',
+    'lqip_saved_as':          'Guardado como',
 
     # Settings
     'settings_title': 'Ajustes',

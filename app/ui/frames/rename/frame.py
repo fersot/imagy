@@ -20,6 +20,12 @@ from app.ui.frames.base import BaseFrame
 from app.ui.frames.rename.services import generar_nombres_preview, renombrar_archivos
 from app.ui.frames.rename.state import RenameState
 
+FORMATOS_FECHA = {
+    'AAAAMMDD':  '%Y%m%d',
+    'DDMMAAAA':  '%d%m%Y',
+    'AAAA-MM-DD': '%Y-%m-%d',
+    'DD-MM-AAAA': '%d-%m-%Y',
+}
 
 class RenameFrame(BaseFrame):
     """Frame del modulo de renombrado en lote."""
@@ -142,7 +148,7 @@ class RenameFrame(BaseFrame):
 
         ctk.CTkSegmentedButton(
             fila_fecha,
-            values=['prefijo', 'sufijo'],
+            values=['Prefijo', 'Sufijo'],
             variable=self._state.posicion_fecha,
             font=fonts.FUENTE_CHICA,
             selected_color=colors.ACENTO,
@@ -155,7 +161,7 @@ class RenameFrame(BaseFrame):
 
         ctk.CTkOptionMenu(
             fila_fecha,
-            values=['%Y%m%d', '%d%m%Y', '%Y-%m-%d', '%d-%m-%Y'],
+            values=list(FORMATOS_FECHA.keys()),
             variable=self._state.formato_fecha,
             font=fonts.FUENTE_BASE,
             fg_color=colors.SIDEBAR_BG,
@@ -165,7 +171,10 @@ class RenameFrame(BaseFrame):
             dropdown_fg_color=colors.PANEL_BG,
             dropdown_text_color=colors.TEXT_COLOR,
             dropdown_hover_color=colors.SIDEBAR_HOVER,
-            command=lambda _: self._actualizar_preview()
+            command=lambda v: (
+                self._state.formato_fecha.set(FORMATOS_FECHA[v]),
+                self._actualizar_preview()
+            )
         ).pack(side='left')
 
         # Separador
@@ -182,7 +191,7 @@ class RenameFrame(BaseFrame):
 
         ctk.CTkSegmentedButton(
             p,
-            values=['minusculas', 'mayusculas'],
+            values=['Minusculas', 'Mayusculas'],
             variable=self._state.caso,
             font=fonts.FUENTE_CHICA,
             selected_color=colors.ACENTO,
