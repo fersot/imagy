@@ -2,8 +2,7 @@
 
 # Yagua - Procesador de Imágenes
 
-Aplicación de escritorio para procesar imágenes en lote con una interfaz moderna, rápida y enfocada en productividad.
-
+Yagua es una app de escritorio para procesamiento de imágenes. Incluye compresión, conversión, remoción de fondo con IA, edición EXIF, generación de LQIP/Base64 y más. Está pensada para flujos de trabajo rápidos sin depender de herramientas web o servicios externos.
 ---
 
 ## Tabla de Contenidos
@@ -20,12 +19,6 @@ Aplicación de escritorio para procesar imágenes en lote con una interfaz moder
 10. [Sistema de Traducciones](#sistema-de-traducciones)
 11. [Contribución](#contribucion)
 12. [Licencia](#licencia)
-
----
-
-## Descripción
-
-Yagua es una app de escritorio para procesamiento masivo de imágenes. Incluye compresión, conversión, remoción de fondo con IA, edición EXIF, generación de LQIP/Base64 y más. Está pensada para flujos de trabajo rápidos sin depender de herramientas web o servicios externos.
 
 ---
 
