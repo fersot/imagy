@@ -2,42 +2,38 @@
 
 # Yagua - Procesador de Imágenes
 
-Aplicación de escritorio para procesar imágenes en lote de forma rápida y simple. Incluye compresión, conversión, quitar fondo con IA, edición de metadatos y generación de LQIP/Base64.
+Aplicación de escritorio para procesar imágenes en lote de forma rápida y elegante. Pensada para flujos de trabajo reales: compresión, conversión, quitar fondo con IA, metadatos EXIF y LQIP/Base64.
 
 ---
 
-## Tabla de Contenidos
+## 📋 Índice
 
-1. [Descripción](#descripcion)
-2. [Instalación](#instalacion)
-3. [Uso](#uso)
-4. [Tecnologías](#tecnologias)
-5. [Features](#features)
-6. [Contribución](#contribucion)
-7. [Créditos](#creditos)
-8. [Licencia](#licencia)
-
----
-
-## Descripción
-
-Yagua surgió como alternativa a las herramientas web de procesamiento de imágenes: lentas, con límites de archivos, y con planes de pago para tareas que deberían ser simples. Es una app de escritorio gratuita y open source que corre todo localmente.
-
-Está pensada para desarrolladores web, diseñadores, fotógrafos y cualquier usuario que necesite procesar imágenes en lote sin depender de un navegador ni pagar una suscripción.
-
-A diferencia de tools como IrfanView o XnConvert, Yagua integra en una sola interfaz features orientadas al flujo de trabajo web moderno: generación de LQIP y Base64, quitar fondo con IA (rembg, funciona offline una vez descargado el modelo), edición de metadatos EXIF y compresión/conversión en lote sin límite de archivos.
+1. [📖 Descripción](#-descripción)
+2. [⚙️ Instalación](#️-instalación)
+3. [🚀 Uso](#-uso)
+4. [🔧 Tecnologías](#-tecnologías)
+5. [✨ Features](#-features)
+6. [🤝 Contribución](#-contribución)
+7. [💡 Créditos](#-créditos)
+8. [📄 Licencia](#-licencia)
 
 ---
 
-## Instalación
+## 📖 Descripción
 
-### Instalador (recomendado)
+Yagua es una app de escritorio enfocada en productividad. Permite procesar grandes cantidades de imágenes sin depender de servicios web, con resultados consistentes y rápidos.
 
-1. Descarga el instalador de la última release.
+---
+
+## ⚙️ Instalación
+
+### ✅ Instalador (recomendado)
+
+1. Descarga el instalador desde la última release.
 2. Ejecuta el `.exe` y sigue el asistente.
-3. Abre Yagua desde el escritorio o el menú inicio.
+3. Abre Yagua desde el escritorio o menú inicio.
 
-### Desde código (source)
+### 🐍 Desde código (source)
 
 1. Clona el repositorio.
 2. Crea y activa tu entorno virtual.
@@ -46,7 +42,7 @@ A diferencia de tools como IrfanView o XnConvert, Yagua integra en una sola inte
 
 ---
 
-## Uso
+## 🚀 Uso
 
 1. Abre la app.
 2. Selecciona un módulo en la barra lateral.
@@ -55,21 +51,19 @@ A diferencia de tools como IrfanView o XnConvert, Yagua integra en una sola inte
 
 ---
 
-## Tecnologías
+## 🔧 Tecnologías
 
-| Tecnología | Uso |
-|---|---|
-| Python 3.13+ | Lenguaje base |
-| CustomTkinter | Interfaz gráfica |
-| Pillow | Procesamiento de imágenes |
-| piexif | Lectura y edición de metadatos EXIF |
-| tkinterdnd2 | Drag & drop |
-| rembg | Eliminación de fondo con IA |
-| Codex | Asistencia de desarrollo |
+- Python 3.13+
+- CustomTkinter
+- Pillow
+- piexif
+- tkinterdnd2
+- rembg
+- Codex (asistencia de desarrollo)
 
 ---
 
-## Features
+## ✨ Features
 
 - Compresión y conversión de imágenes
 - Redimensionar, recortar y canvas
@@ -81,7 +75,7 @@ A diferencia de tools como IrfanView o XnConvert, Yagua integra en una sola inte
 
 ---
 
-## Galería
+## 🖼️ Galería
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5f4274b6-dec6-434c-82b3-81b8135287a9" width="250"/>
@@ -103,7 +97,7 @@ A diferencia de tools como IrfanView o XnConvert, Yagua integra en una sola inte
 
 ---
 
-## Contribución
+## 🤝 Contribución
 
 - Abre un issue para bugs o ideas.
 - Envía un PR con cambios claros y pequeños.
@@ -111,12 +105,12 @@ A diferencia de tools como IrfanView o XnConvert, Yagua integra en una sola inte
 
 ---
 
-## Créditos
+## 💡 Créditos
 
-Guille Bouix
+Guillermo Daniel Bouix
 
 ---
 
-## Licencia
+## 📄 Licencia
 
 MIT License - Ver archivo LICENSE para más detalles.

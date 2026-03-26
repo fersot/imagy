@@ -70,4 +70,5 @@ exports/
 *.pdf
 *.psd
 *.iss
+assets/installer/
 installer/
