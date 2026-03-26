@@ -29,44 +29,6 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
 
 ---
 
-## ⚙️ Instalación
-
-### ✅ Instalador (recomendado)
-
-1. Descarga el instalador de la última release.
-2. Ejecuta el `.exe` y sigue el asistente.
-3. Abre Yagua desde el escritorio o el menú inicio.
-
-### 🐍 Desde código (source)
-
-1. Clona el repositorio.
-2. Crea y activa tu entorno virtual.
-3. Instala dependencias con `pip install -r requirements.txt`.
-4. Ejecuta `python main.py`.
-
----
-
-## 🚀 Uso
-
-1. Abre la app.
-2. Selecciona un módulo en la barra lateral.
-3. Carga imágenes y procesa.
-4. Guarda los resultados en la carpeta de salida.
-
----
-
-## 🔧 Tecnologías
-
-- Python 3.13+
-- CustomTkinter
-- Pillow
-- piexif
-- tkinterdnd2
-- rembg
-- Codex (asistencia de desarrollo)
-
----
-
 ## ✨ Features
 
 - Compresión y conversión de imágenes
@@ -98,6 +60,44 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
   <img src="https://github.com/user-attachments/assets/7c55eb50-8472-4072-9cd3-b97a905273b7" width="250"/>
   <img src="https://github.com/user-attachments/assets/650b1519-77aa-4c3a-9863-c1a8cb0c9613" width="250"/>
 </p>
+
+---
+
+## ⚙️ Instalación
+
+### ✅ Instalador (recomendado)
+
+1. Descarga el instalador de la última release.
+2. Ejecuta el `.exe` y sigue el asistente.
+3. Abre Yagua desde el escritorio o el menú inicio.
+
+### 🐍 Desde código (source)
+
+1. Clona el repositorio.
+2. Crea y activa tu entorno virtual.
+3. Instala dependencias con `pip install -r requirements.txt`.
+4. Ejecuta `python main.py`.
+
+---
+
+## 🚀 Uso
+
+1. Abre la app.
+2. Selecciona un módulo en la barra lateral.
+3. Carga imágenes y procesa.
+4. Guarda los resultados en la carpeta de salida.
+
+---
+
+## 🔧 Tecnologías Utilizadas
+
+- Python 3.13+
+- CustomTkinter
+- Pillow
+- piexif
+- tkinterdnd2
+- rembg
+- Codex (asistencia de desarrollo)
 
 ---
 
