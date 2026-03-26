@@ -462,6 +462,13 @@ class MetadataFrame(BaseFrame):
         Args:
             rutas: Lista de rutas de archivos seleccionados
         """
+        limite = 100
+        total = len(rutas)
+        if total > limite:
+            rutas = rutas[:limite]
+            msg = t('limit_reached').format(limit=limite, total=total)
+            self._lbl_info.configure(text=msg)
+
         self._state.imagenes_lote = rutas
         build_file_list(
             self._lista_lote, rutas, self._filas_lote, self._thumbs,

@@ -167,6 +167,14 @@ class CompressFrame(BaseFrame):
         Args:
             rutas: Lista de rutas de archivos a cargar.
         """
+        limite = 100
+        total = len(rutas)
+        if total > limite:
+            rutas = rutas[:limite]
+            self._limite_msg = t('limit_reached').format(limit=limite, total=total)
+        else:
+            self._limite_msg = None
+
         super()._cargar_imagenes(rutas)
         self._state.imagenes = list(rutas)
         threading.Thread(target=self._procesar_carga, args=(rutas,), daemon=True).start()
@@ -197,9 +205,10 @@ class CompressFrame(BaseFrame):
         """
         if estimado > 0:
             suffix = t('images_loaded') if n > 1 else t('image_loaded')
-            self._lbl_info.configure(
-                text=f'{n} {suffix} - {t("estimated")} {formatear_bytes(estimado)}'
-            )
+            msg = f'{n} {suffix} - {t("estimated")} {formatear_bytes(estimado)}'
+            if self._limite_msg:
+                msg += f'  -  {self._limite_msg}'
+            self._lbl_info.configure(text=msg)
 
     def _actualizar_calidad(self, val):
         """

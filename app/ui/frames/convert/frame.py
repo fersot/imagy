@@ -172,6 +172,14 @@ class ConvertFrame(BaseFrame):
         Args:
             rutas: Lista de rutas de archivos a cargar.
         """
+        limite = 100
+        total = len(rutas)
+        if total > limite:
+            rutas = rutas[:limite]
+            self._limite_msg = t('limit_reached').format(limit=limite, total=total)
+        else:
+            self._limite_msg = None
+
         super()._cargar_imagenes(rutas)
         self._state.imagenes = list(rutas)
         self._actualizar_info()
@@ -210,7 +218,10 @@ class ConvertFrame(BaseFrame):
         if self._imagenes:
             n = len(self._imagenes)
             suffix = t('images_loaded') if n > 1 else t('image_loaded')
-            self._lbl_info.configure(text=f'{n} {suffix} -> {fmt}')
+            msg = f'{n} {suffix} -> {fmt}'
+            if self._limite_msg:
+                msg += f'  -  {self._limite_msg}'
+            self._lbl_info.configure(text=msg)
 
     def _convertir(self):
         """

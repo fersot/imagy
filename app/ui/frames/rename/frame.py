@@ -315,11 +315,22 @@ class RenameFrame(BaseFrame):
 
     def _cargar_imagenes(self, rutas):
         """Carga archivos y dispara el preview."""
+        limite = 100
+        total = len(rutas)
+        if total > limite:
+            rutas = rutas[:limite]
+            self._limite_msg = t('limit_reached').format(limit=limite, total=total)
+        else:
+            self._limite_msg = None
+
         self._imagenes = list(rutas)
         self._state.imagenes = self._imagenes
         n = len(rutas)
         suffix = t('files_loaded') if n > 1 else t('file_loaded')
-        self._lbl_info.configure(text=f'{n} {suffix}')
+        msg = f'{n} {suffix}'
+        if self._limite_msg:
+            msg += f'  -  {self._limite_msg}'
+        self._lbl_info.configure(text=msg)
         self._actualizar_preview()
 
     def _actualizar_preview(self, *args):

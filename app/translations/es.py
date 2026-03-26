@@ -24,6 +24,7 @@ TRANSLATIONS = {
     'app_title': 'Yagua - Procesador de Imágenes',
     'loading_model': 'Cargando modelo...',
     'downloading_model': 'Descargando modelo...',
+    'limit_reached': 'Se cargaron {limit} de {total} imágenes (límite máximo).',
     
     # Sidebar
     'compress': 'Comprimir',

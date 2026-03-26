@@ -24,6 +24,7 @@ TRANSLATIONS = {
     'app_title': 'Yagua - Image Processor',
     'loading_model': 'Loading model...',
     'downloading_model': 'Downloading model...',
+    'limit_reached': 'Loaded {limit} of {total} images (maximum limit).',
     
     # Sidebar
     'compress': 'Compress',

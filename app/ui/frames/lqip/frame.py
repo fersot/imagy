@@ -310,12 +310,23 @@ class LqipFrame(BaseFrame):
 
     def _cargar_imagenes(self, rutas):
         """Carga archivos y limpia resultados anteriores."""
+        limite = 100
+        total = len(rutas)
+        if total > limite:
+            rutas = rutas[:limite]
+            self._limite_msg = t('limit_reached').format(limit=limite, total=total)
+        else:
+            self._limite_msg = None
+
         super()._cargar_imagenes(rutas)
         self._state.imagenes = list(rutas)
         self._state.resultados = []
         n = len(rutas)
         suffix = t('images_loaded') if n > 1 else t('image_loaded')
-        self._lbl_info.configure(text=f'{n} {suffix}')
+        msg = f'{n} {suffix}'
+        if self._limite_msg:
+            msg += f'  -  {self._limite_msg}'
+        self._lbl_info.configure(text=msg)
 
     def _procesar(self):
         """Inicia el procesamiento en segundo plano."""

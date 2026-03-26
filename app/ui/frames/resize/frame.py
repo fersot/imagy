@@ -382,11 +382,22 @@ class ResizeFrame(BaseFrame):
         Args:
             rutas: Lista de rutas de archivos seleccionados
         """
+        limite = 100
+        total = len(rutas)
+        if total > limite:
+            rutas = rutas[:limite]
+            self._limite_msg = t('limit_reached').format(limit=limite, total=total)
+        else:
+            self._limite_msg = None
+
         super()._cargar_imagenes(rutas)
         self._state.imagenes = list(rutas)
         n = len(self._imagenes)
         suffix = t('images_loaded_resize') if n > 1 else t('image_loaded_resize')
-        self._lbl_info.configure(text=f'{n} {suffix}')
+        msg = f'{n} {suffix}'
+        if self._limite_msg:
+            msg += f'  -  {self._limite_msg}'
+        self._lbl_info.configure(text=msg)
 
     def _cambiar_tab(self, tab: str):
         """Cambiar el tab visible en el contenedor.
