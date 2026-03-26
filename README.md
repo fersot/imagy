@@ -109,9 +109,9 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
 
 ---
 
-## 💡 Créditos
+## ⭐ Apoyá el proyecto
 
-Guillermo Daniel Bouix
+Si Yagua te resultó útil, dejá una estrella en el repo — es gratis y ayuda un montón a que más gente lo encuentre :)
 
 ---
 
