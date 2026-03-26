@@ -29,16 +29,16 @@ Yagua es una app de escritorio enfocada en productividad. Permite procesar grand
 
 ### ✅ Instalador (recomendado)
 
-1. Descarga el instalador desde la última release.
+1. Descarga el instalador de la última release.
 2. Ejecuta el `.exe` y sigue el asistente.
-3. Abre Yagua desde el escritorio o menú inicio.
+3. Abre Yagua desde el escritorio o el menú inicio.
 
 ### 🐍 Desde código (source)
 
 1. Clona el repositorio.
 2. Crea y activa tu entorno virtual.
 3. Instala dependencias con `pip install -r requirements.txt`.
-4. Ejecuta `python -m app.main`.
+4. Ejecuta `python main.py`.
 
 ---
 
