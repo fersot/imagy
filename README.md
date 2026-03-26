@@ -4,8 +4,6 @@
 
 Aplicación de escritorio para procesar imágenes en lote de forma rápida y elegante. Pensada para flujos de trabajo reales: compresión, conversión, quitar fondo con IA, metadatos EXIF y LQIP/Base64.
 
----
-
 ## 📋 Índice
 
 1. [📖 Descripción](#-descripción)
@@ -17,8 +15,6 @@ Aplicación de escritorio para procesar imágenes en lote de forma rápida y ele
 7. [💡 Créditos](#-créditos)
 8. [📄 Licencia](#-licencia)
 
----
-
 ## 📖 Descripción
 
 Yagua surgió como alternativa a las herramientas web de procesamiento de imágenes: limitadas y con planes de pago para tareas que deberían ser simples. Es una app de escritorio gratuita y open source que corre todo localmente.
@@ -26,8 +22,6 @@ Yagua surgió como alternativa a las herramientas web de procesamiento de imáge
 Está pensada para desarrolladores web, diseñadores, fotógrafos y cualquier usuario que necesite procesar imágenes en lote sin depender de un navegador ni pagar una suscripción.
 
 Yagua integra en una sola interfaz features orientadas al flujo de trabajo web moderno: generación de LQIP y Base64, quitar fondo con IA (rembg, funciona offline una vez descargado el modelo), edición de metadatos EXIF y compresión/conversión en lote sin límite de archivos.
-
----
 
 ## ✨ Features
 
@@ -38,8 +32,6 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
 - Metadatos EXIF (ver, editar, limpiar)
 - LQIP / Base64
 - Multi-idioma (ES / EN / PT)
-
----
 
 ## 🖼️ Galería
 
@@ -61,8 +53,6 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
   <img src="https://github.com/user-attachments/assets/650b1519-77aa-4c3a-9863-c1a8cb0c9613" width="250"/>
 </p>
 
----
-
 ## ⚙️ Instalación
 
 ### ✅ Instalador (recomendado)
@@ -78,16 +68,12 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
 3. Instala dependencias con `pip install -r requirements.txt`.
 4. Ejecuta `python main.py`.
 
----
-
 ## 🚀 Uso
 
 1. Abre la app.
 2. Selecciona un módulo en la barra lateral.
 3. Carga imágenes y procesa.
 4. Guarda los resultados en la carpeta de salida.
-
----
 
 ## 🔧 Tecnologías Utilizadas
 
@@ -99,21 +85,15 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
 - rembg
 - Codex (asistencia de desarrollo)
 
----
-
 ## 🤝 Contribución
 
 - Abre un issue para bugs o ideas.
 - Envía un PR con cambios claros y pequeños.
 - Mantén el estilo del proyecto y la estructura actual.
 
----
-
 ## ⭐ Apoyá el proyecto
 
 Si Yagua te resultó útil, dejá una estrella en el repo — es gratis y ayuda un montón a que más gente lo encuentre :)
-
----
 
 ## 📄 Licencia
 
