@@ -47,19 +47,19 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
 
 ## ⚙️ Instalación
 
-### Instalación (Windows)
+### 🖥️ Instalación (Windows)
 1. Descargar `Yagua_Setup_1.1.0.zip`
 2. Descomprimir archivo `.zip`
 3. Ejecutar `Yagua_Setup_1.1.0.exe`
 4. Seguir instrucciones de instalación
 5. Ejecutar programa desde el escritorio
 
-### Instalación (Linux)
+### 🐧 Instalación (Linux)
 1. Descargar `Yagua-1.1.0-x86_64.AppImage`
 2. Ejecutar en terminal `chmod +x Yagua-1.1.0-x86_64.AppImage`
 3. Luego `./Yagua-1.1.0-x86_64.AppImage`
 
-### Desde código fuente
+### 🐍 Código fuente
 
 1. Clona el repositorio.
 2. Crea y activa tu entorno virtual.
