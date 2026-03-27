@@ -4,6 +4,9 @@
 
 Aplicación de escritorio para procesar imágenes en lote de forma rápida y elegante. Pensada para flujos de trabajo reales: compresión, conversión, quitar fondo con IA, metadatos EXIF y LQIP/Base64.
 
+<a href="https://www.paypal.com/paypalme/guillebouix?locale.x=es_XC&country.x=AR"><img width="300" alt="paypal_donate_button" src="https://github.com/user-attachments/assets/2f3f6a1b-990c-4fb8-9fda-7482c1ca20a5" />
+</a>
+
 ## 📖 Descripción
 
 Yagua surgió como alternativa a las herramientas web de procesamiento de imágenes: limitadas y con planes de pago para tareas que deberían ser simples. Es una app de escritorio gratuita y open source que corre todo localmente.
