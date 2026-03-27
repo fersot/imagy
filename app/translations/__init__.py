@@ -29,7 +29,7 @@ AVAILABLE_LANGUAGES = {
 }
 
 # Idioma por defecto cuando no hay configuracion guardada
-DEFAULT_LANGUAGE = 'Español'
+DEFAULT_LANGUAGE = 'English'
 
 # Idioma actual (se carga desde settings al inicio)
 _current_lang: Optional[str] = None

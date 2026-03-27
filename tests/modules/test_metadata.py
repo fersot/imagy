@@ -26,6 +26,6 @@ def test_editar_exif(tmp_path: Path, fixtures_dir: Path):
     ok, warning = editar_exif(
         str(entrada),
         str(salida),
-        {"Artist": "Test", "Software": "Yagua"},
+        {"Artist": "Test", "Software": "Imagy"},
     )
     assert ok is True

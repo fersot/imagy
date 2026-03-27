@@ -1,5 +1,5 @@
 """
-Paquete UI de la aplicacion Yagua.
+Paquete UI de la aplicacion Imagy.
 Contiene todos los componentes de la interfaz de usuario.
 
 Relacionado con:

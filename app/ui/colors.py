@@ -20,10 +20,43 @@ from app.utils.settings import settings_path
 
 
 # Tema por defecto al iniciar la aplicacion
-DEFAULT_THEME = 'Default'
+DEFAULT_THEME = 'Imagy'
 
 # Diccionario de temas disponibles con sus colores
 THEMES = {
+    'Imagy': {
+        # Fondos principales — deep navy del logo
+        'FRAMES_BG': '#0d1117',
+        'SIDEBAR_BG': '#090d13',
+        'PANEL_BG': '#161b25',
+        'SIDEBAR_SEPARATOR': '#1e2736',
+        # Estados de interaccion en sidebar
+        'SIDEBAR_HOVER': '#1a2232',
+        'SIDEBAR_ACTIVE': '#8b5cf6',
+        'SIDEBAR_ACTIVE_HOVER': '#7c3aed',
+        # Zona de drop
+        'DROPZONE_BORDER': '#2a3a52',
+        'DROPZONE_BG': '#0b0f18',
+        # Colores de texto
+        'TEXT_COLOR': '#e8eaf6',
+        'TEXT_GRAY': '#7986a8',
+        'TEXT_HOVER': '#ffffff',
+        'TEXT_ACTIVE': '#ffffff',
+        # Colores de iconos
+        'ICON_COLOR': '#c5cae9',
+        'ICON_COLOR_ACTIVE': '#ffffff',
+        # Colores de acento — violeta del logo
+        'ACENTO': '#8b5cf6',
+        'ACENTO_HOVER': '#7c3aed',
+        'ACENTO_DIMMED': '#1e1b3a',
+        # Colores de botones — cyan del logo
+        'BTN_CLEAR_BG': '#06b6d4',
+        'BTN_CLEAR_TEXT': '#0d1117',
+        'BTN_CLEAR_HOVER': '#0ea5c9',
+        # Colores de segmentos
+        'SEGMENT_SELECTED': '#8b5cf6',
+        'SEGMENT_SELECTED_HOVER': '#7c3aed',
+    },
     'Default': {
         # Fondos principales
         'FRAMES_BG': '#0A0A0B',

@@ -1,5 +1,5 @@
 """
-Aplicacion principal Yagua.
+Aplicacion principal Imagy.
 Contiene la clase principal que inicializa la ventana y componentes.
 
 Relacionado con:
@@ -24,9 +24,9 @@ from app.translations import t
 logger = logging.getLogger(__name__)
 
 
-class YaguaApp(ctk.CTk):
+class ImaGyApp(ctk.CTk):
     """
-    Ventana principal de la aplicacion Yagua.
+    Ventana principal de la aplicacion Imagy.
     
     Hereda de CTk (CustomTkinter) y es responsable de:
         - Configurar la ventana y su geometria.

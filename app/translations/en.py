@@ -21,7 +21,7 @@ organized by section:
 
 TRANSLATIONS = {
     # App
-    'app_title': 'Yagua - Image Processor',
+    'app_title': 'Imagy - Image Processor',
     'loading_model': 'Loading model...',
     'downloading_model': 'Downloading model...',
     'limit_reached': 'Loaded {limit} of {total} images (maximum limit).',
@@ -39,7 +39,7 @@ TRANSLATIONS = {
     'optimizer': 'Optimizer',
     'settings': 'Settings',
     'developed_by': 'Developed by ',
-    'github': '@guillebouix.dev',
+    'github': '@fersot',
     
     # Compress
     'compress_title': 'Compress',
@@ -250,7 +250,7 @@ TRANSLATIONS = {
     'visible_modules_hint': 'Select the modules you want to see in the sidebar.',
     'apply_changes': 'Apply',
     'restart_required_generic': 'Restarting application to apply changes...',
-    'donate_paypal': 'Donate with PayPal',
-    'donate_paypal_btn': 'Support with PayPal',
+    'donate_bmc': 'Buy Me a Coffee',
+    'donate_bmc_btn': 'Buy Me a Coffee',
     'donate': 'Support the Project',
 }

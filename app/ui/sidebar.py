@@ -24,14 +24,14 @@ from app.utils.paths import resource_path
 from app.translations import t
 from app.ui.module_registry import iter_enabled_modules
 
-# URL de donacion (PayPal)
-DONATION_URL = 'https://paypal.me/guillebouix?locale.x=es_XC&country.x=AR'
+# URL de donacion (Buy Me a Coffee)
+DONATION_URL = 'https://buymeacoffee.com/fersot'
 
 
 logger = logging.getLogger(__name__)
 
 # URL del repositorio de GitHub
-GITHUB_URL = 'https://github.com/GuilleBouix'
+GITHUB_URL = 'https://github.com/fersot'
 
 # Tamano maximo del logo en la parte superior
 LOGO_SIZE = 135

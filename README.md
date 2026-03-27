@@ -1,19 +1,18 @@
 <img width="1761" height="497" alt="banner" src="https://github.com/user-attachments/assets/fc1dacf8-5249-43da-a294-4b20dc423304" />
 
-# Yagua - Procesador de Imágenes
+# Imagy - Procesador de Imágenes
 
 Aplicación de escritorio para procesar imágenes en lote de forma rápida y elegante. Pensada para flujos de trabajo reales: compresión, conversión, quitar fondo con IA, metadatos EXIF y LQIP/Base64.
 
-<a href="https://www.paypal.com/paypalme/guillebouix?locale.x=es_XC&country.x=AR" target="_blank"><img width="300" alt="paypal_donate_button" src="https://github.com/user-attachments/assets/2f3f6a1b-990c-4fb8-9fda-7482c1ca20a5" />
-</a>
+<a href="https://buymeacoffee.com/fersot" target="_blank"><img width="200" alt="Buy Me A Coffee" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" /></a>
 
 ## 📖 Descripción
 
-Yagua surgió como alternativa a las herramientas web de procesamiento de imágenes: limitadas y con planes de pago para tareas que deberían ser simples. Es una app de escritorio gratuita y open source que corre todo localmente.
+Imagy surgió como alternativa a las herramientas web de procesamiento de imágenes: limitadas y con planes de pago para tareas que deberían ser simples. Es una app de escritorio gratuita y open source que corre todo localmente.
 
 Está pensada para desarrolladores web, diseñadores, fotógrafos y cualquier usuario que necesite procesar imágenes en lote sin depender de un navegador ni pagar una suscripción.
 
-Yagua integra en una sola interfaz features orientadas al flujo de trabajo web moderno: generación de LQIP y Base64, quitar fondo con IA (rembg, funciona offline una vez descargado el modelo), edición de metadatos EXIF y compresión/conversión en lote sin límite de archivos.
+Imagy integra en una sola interfaz features orientadas al flujo de trabajo web moderno: generación de LQIP y Base64, quitar fondo con IA (rembg, funciona offline una vez descargado el modelo), edición de metadatos EXIF y compresión/conversión en lote sin límite de archivos.
 
 ## ✨ Features
 
@@ -51,16 +50,16 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
 ## ⚙️ Instalación
 
 ### 🖥️ Instalación (Windows)
-1. Descargar `Yagua_Setup_1.1.0.zip`
+1. Descargar `Imagy_Setup_1.1.0.zip`
 2. Descomprimir archivo `.zip`
-3. Ejecutar `Yagua_Setup_1.1.0.exe`
+3. Ejecutar `Imagy_Setup_1.1.0.exe`
 4. Seguir instrucciones de instalación
 5. Ejecutar programa desde el escritorio
 
 ### 🐧 Instalación (Linux)
-1. Descargar `Yagua-1.1.0-x86_64.AppImage`
-2. Ejecutar en terminal `chmod +x Yagua-1.1.0-x86_64.AppImage`
-3. Luego `./Yagua-1.1.0-x86_64.AppImage`
+1. Descargar `Imagy-1.1.0-x86_64.AppImage`
+2. Ejecutar en terminal `chmod +x Imagy-1.1.0-x86_64.AppImage`
+3. Luego `./Imagy-1.1.0-x86_64.AppImage`
 
 ### 🐍 Código fuente
 
@@ -71,7 +70,7 @@ Yagua integra en una sola interfaz features orientadas al flujo de trabajo web m
 
 ## 🧩 Requisitos recomendados
 
-Para que Yagua funcione de manera fluida, especialmente con lotes grandes (hasta 100 imágenes):
+Para que Imagy funcione de manera fluida, especialmente con lotes grandes (hasta 100 imágenes):
 
 #### ✅ Sistema
 - Windows 10/11 o Linux x64
@@ -117,7 +116,7 @@ Para que Yagua funcione de manera fluida, especialmente con lotes grandes (hasta
 
 ## ⭐ Apoyá el proyecto
 
-Si Yagua te resultó útil, dejá una estrella en el repo — es gratis y ayuda un montón a que más gente lo encuentre :)
+Si Imagy te resultó útil, dejá una estrella en el repo — es gratis y ayuda un montón a que más gente lo encuentre :)
 
 ## 📄 Licencia
 

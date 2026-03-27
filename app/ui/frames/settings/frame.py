@@ -33,7 +33,7 @@ from app.ui.frames.settings.services import (
 from app.ui.frames.settings.state import SettingsState
 from app.ui.module_registry import iter_all_modules
 
-PAYPAL_DONATION_URL = 'https://paypal.me/guillebouix?locale.x=es_XC&country.x=AR'
+BMC_DONATION_URL = 'https://buymeacoffee.com/fersot'
 
 class SettingsFrame(BaseFrame):
     """Frame principal del modulo de ajustes de la aplicacion."""
@@ -125,7 +125,7 @@ class SettingsFrame(BaseFrame):
         icon_donar = tintar_icono('assets/icons/heart.png', '#000000')
         btn = ctk.CTkButton(
             self._title_row,
-            text=t('donate_paypal_btn'),
+            text=t('donate_bmc_btn'),
             image=icon_donar,
             compound='left',
             width=150,
@@ -136,7 +136,7 @@ class SettingsFrame(BaseFrame):
             text_color=colors.BTN_CLEAR_TEXT,
             hover_color=colors.BTN_CLEAR_HOVER,
             border_width=0,
-            command=lambda: webbrowser.open(PAYPAL_DONATION_URL)
+            command=lambda: webbrowser.open(BMC_DONATION_URL)
         )
         btn.grid(row=0, column=2, padx=(8, 0), sticky='e')
 

@@ -29,7 +29,7 @@ class MainWindow(ctk.CTkFrame):
         Inicializa la ventana principal.
         
         Args:
-            parent: Widget padre (normalmente la instancia de YaguaApp).
+            parent: Widget padre (normalmente la instancia de ImaGyApp).
         """
         super().__init__(parent, corner_radius=0)
         

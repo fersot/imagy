@@ -25,5 +25,5 @@ Todos los cambios notables del proyecto se documentan en este archivo.
 - Bot?n "Aplicar" para evitar reinicios al cambiar opciones.
 - Sidebar con scroll solo si hay m?s de un m?dulo visible.
 - Loader interno en "Quitar fondo" (no bloquea la pantalla).
-- Botones de apoyo/donaci?n en sidebar y Ajustes (PayPal).
+- Botones de apoyo/donación en sidebar y Ajustes (Buy Me a Coffee).
 - Logs mejorados para errores en "Quitar fondo".

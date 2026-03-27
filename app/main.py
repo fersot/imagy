@@ -1,9 +1,9 @@
 """
-Punto de entrada principal de la aplicacion Yagua.
+Punto de entrada principal de la aplicacion Imagy.
 Configura el tema de CustomTkinter e inicia la aplicacion.
 
 Relacionado con:
-    - app/app.py: Contiene la clase YaguaApp que se instancia aqui.
+    - app/app.py: Contiene la clase ImaGyApp que se instancia aqui.
     - app/ui/colors.py: Define los temas visuales de la app.
 """
 
@@ -12,7 +12,7 @@ import sys
 
 import customtkinter as ctk
 
-from app.app import YaguaApp
+from app.app import ImaGyApp
 from app.utils.settings import settings_path
 
 
@@ -24,7 +24,7 @@ def main():
     luego crea y ejecuta la ventana principal.
     """
     # Configurar logging a archivo para diagnostico en exe
-    log_path = settings_path().with_name('yagua.log')
+    log_path = settings_path().with_name('imagy.log')
     logging.basicConfig(
         filename=str(log_path),
         filemode='a',
@@ -49,7 +49,7 @@ def main():
     ctk.set_default_color_theme('blue')
     
     # Crear instancia de la aplicacion principal
-    app = YaguaApp()
+    app = ImaGyApp()
     
     # Iniciar el loop principal de la interfaz
     app.mainloop()

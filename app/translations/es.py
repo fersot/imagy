@@ -21,7 +21,7 @@ en la aplicación organizadas por seccion:
 
 TRANSLATIONS = {
     # App
-    'app_title': 'Yagua - Procesador de Imágenes',
+    'app_title': 'Imagy - Procesador de Imágenes',
     'loading_model': 'Cargando modelo...',
     'downloading_model': 'Descargando modelo...',
     'limit_reached': 'Se cargaron {limit} de {total} imágenes (límite máximo).',
@@ -39,7 +39,7 @@ TRANSLATIONS = {
     'optimizer': 'Optimizador',
     'settings': 'Ajustes',
     'developed_by': 'Desarrollado por ',
-    'github': '@guillebouix.dev',
+    'github': '@fersot',
     
     # Comprimir
     'compress_title': 'Comprimir',
@@ -251,7 +251,7 @@ TRANSLATIONS = {
     'visible_modules_hint': 'Elegí los módulos que querés ver en la barra lateral.',
     'apply_changes': 'Aplicar',
     'restart_required_generic': 'Reiniciando aplicación para aplicar cambios...',
-    'donate_paypal': 'Donar con PayPal',
-    'donate_paypal_btn': 'Apoyar con PayPal',
+    'donate_bmc': 'Buy Me a Coffee',
+    'donate_bmc_btn': 'Invitame un café',
     'donate': 'Apoyar el Proyecto',
 }
