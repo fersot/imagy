@@ -141,6 +141,11 @@ jobs:
       - name: Build with PyInstaller
         run: pyinstaller imagy.spec --clean --noconfirm
 
+      - name: Ad-hoc code sign (bypass Gatekeeper)
+        run: |
+          codesign --force --deep --sign - dist/Imagy.app
+          xattr -cr dist/Imagy.app
+
       - name: Create DMG
         run: |
           create-dmg \
@@ -204,6 +209,13 @@ jobs:
             - Windows 10/11 x64
             - Linux x64 (requires `libfuse2`, `libgl1`)
             - macOS 12+ (Apple Silicon & Intel)
+
+            ### 🍎 macOS — first launch
+            The app is not notarized with Apple. On first open you'll see a Gatekeeper warning. To bypass it, run this once in Terminal:
+            ```
+            xattr -cr /Applications/Imagy.app
+            ```
+            Or: right-click the app → **Open** → **Open** again in the dialog.
 
             ---
             Built with ❤️ by [@fersot](https://github.com/fersot)
