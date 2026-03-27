@@ -29,17 +29,6 @@ jobs:
           pip install pyinstaller
           pip install -r requirements.txt
 
-      - name: Patch spec for GitHub runner (no venv)
-        shell: python
-        run: |
-          import site, shutil, os
-          # Copia customtkinter data al lugar que espera el spec
-          ctk_src = os.path.join(site.getsitepackages()[0], 'customtkinter')
-          os.makedirs('venv/Lib/site-packages', exist_ok=True)
-          if not os.path.exists('venv/Lib/site-packages/customtkinter'):
-              shutil.copytree(ctk_src, 'venv/Lib/site-packages/customtkinter')
-          print('customtkinter data copiado OK')
-
       - name: Build with PyInstaller
         run: pyinstaller imagy.spec --clean --noconfirm
 
@@ -82,18 +71,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyinstaller
           pip install -r requirements.txt
-
-      - name: Patch spec for GitHub runner
-        run: |
-          python -c "
-          import site, shutil, os
-          ctk_src = os.path.join(site.getsitepackages()[0], 'customtkinter')
-          os.makedirs('venv/Lib/site-packages', exist_ok=True)
-          dst = 'venv/Lib/site-packages/customtkinter'
-          if not os.path.exists(dst):
-              shutil.copytree(ctk_src, dst)
-          print('OK')
-          "
 
       - name: Build with PyInstaller
         run: pyinstaller imagy.spec --clean --noconfirm
@@ -160,22 +137,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyinstaller
           pip install -r requirements.txt
-
-      - name: Patch spec for GitHub runner
-        run: |
-          python -c "
-          import site, shutil, os
-          # En macOS los site-packages están en un lugar diferente
-          for sp in site.getsitepackages():
-              ctk_src = os.path.join(sp, 'customtkinter')
-              if os.path.exists(ctk_src):
-                  os.makedirs('venv/Lib/site-packages', exist_ok=True)
-                  dst = 'venv/Lib/site-packages/customtkinter'
-                  if not os.path.exists(dst):
-                      shutil.copytree(ctk_src, dst)
-                  print('OK:', ctk_src)
-                  break
-          "
 
       - name: Build with PyInstaller
         run: pyinstaller imagy.spec --clean --noconfirm
