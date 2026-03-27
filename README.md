@@ -1,10 +1,9 @@
-<img width="1761" height="497" alt="banner" src="https://github.com/user-attachments/assets/fc1dacf8-5249-43da-a294-4b20dc423304" />
 
 # Imagy - Procesador de Imágenes
 
 Aplicación de escritorio para procesar imágenes en lote de forma rápida y elegante. Pensada para flujos de trabajo reales: compresión, conversión, quitar fondo con IA, metadatos EXIF y LQIP/Base64.
 
-<a href="https://buymeacoffee.com/fersot" target="_blank"><img width="200" alt="Buy Me A Coffee" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" /></a>
+<a href="https://buymeacoffee.com/fersot" target="_blank">Buy Me a Coffee</a>
 
 ## 📖 Descripción
 
@@ -26,26 +25,6 @@ Imagy integra en una sola interfaz features orientadas al flujo de trabajo web m
 - Generación de LQIP y codificación Base64
 - Soporte multi-idioma (ES / EN / PT)
 - Temas oscuros predefinidos
-
-## 🖼️ Galería
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/f8f57bbb-4cdf-4c5f-8d06-a04b2c3dc1b1" width="250" alt="1"/>
-  <img src="https://github.com/user-attachments/assets/903c897e-eb48-4b6b-b941-2fbfffb234ce" width="250" alt="2"/>
-  <img src="https://github.com/user-attachments/assets/ed7081e4-d106-47db-9744-927be0db9d5d" width="250" alt="3"/>
-</p>
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/381c1f71-debd-47a0-837b-fb8f84e41790" width="250" alt="4"/>
-  <img src="https://github.com/user-attachments/assets/dfe2dd77-f792-4092-a6d7-82b5e96aa104" width="250" alt="5"/>
-  <img src="https://github.com/user-attachments/assets/e3a8f766-84e5-412d-bbaf-acb5936c0380" width="250" alt="6"/>
-</p>
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/235fce12-9796-4304-9252-f9e016edf483" width="250" alt="7"/>
-  <img src="https://github.com/user-attachments/assets/8e8824a4-0bdf-44d8-b82f-7e0c2e1fcfe5" width="250" alt="8"/>
-  <img src="https://github.com/user-attachments/assets/29131d50-2ea2-40c5-9549-d5878d89119a" width="250" alt="9"/>
-</p>
 
 ## ⚙️ Instalación
 
